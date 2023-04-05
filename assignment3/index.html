@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Digital Clock</title>
+</head>
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #1e272e;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+
+    #clock {
+        color: #81ecec;
+        font-size: 5em;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    h1 {
+        font-size: 5em;
+        color: #81ecec;
+        margin: 30px 0;
+        text-align: center;
+
+    }
+</style>
+
+<body>
+
+<h1> Happy Clock</h1>
+<div id="clock"></div>
+
+<script>
+
+    function updateClock() {
+        // Get the current time
+        let currentTime = new Date();
+
+        // Extract hour, minute and second from the date
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+
+        // Pad the minute and second with leading zeros, if required
+        minutes = (minutes < 10 ? "0" : "") + minutes;
+        seconds = (seconds < 10 ? "0" : "") + seconds;
+
+        // Choose between "AM" and "PM"
+        let timeOfDay = hours < 12 ? "AM" : "PM";
+
+        // Convert the hours component to 12-hour format if needed
+        hours = hours > 12 ? hours - 12 : hours;
+
+        // Convert an hours component of "0" to "12"
+        hours = hours === 0 ? 12 : hours;
+
+        // Construct the time string
+        let timeString = hours + ":" + minutes + ":" + seconds + " " + timeOfDay;
+
+        // Update the clock div with the formatted time string
+        document.getElementById("clock").innerText = timeString;
+    }
+
+    // Call the updateClock function once to initialize
+    updateClock();
+
+
+    // Call the updateClock function every second
+    setInterval(updateClock, 1000);
+
+</script>
+</body>
+
+</html>
